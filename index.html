@@ -1,24 +1,45 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>포트폴리오</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
-    h1 { border-bottom: 2px solid #eaecef; padding-bottom: 10px; }
-    .project-card { border: 1px solid #e1e4e8; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-  </style>
-</head>
-<body>
-  <h1>안녕하세요, 개발자 포트폴리오입니다 👋</h1>
-  <p>간단한 자기소개와 주요 관심 분야를 적습니다.</p>
+<section class="portfolio-section">
+  <h2>Featured Projects</h2>
 
-  <h2>Projects</h2>
-  <div class="project-card">
-    <h3>프로젝트명</h3>
-    <p>프로젝트 설명, 사용 기술, 배운 점 등을 기록합니다.</p>
-    <a href="#" target="_blank">GitHub 바로가기</a>
-  </div>
-</body>
-</html>
+  <article class="project-card">
+    <div class="media-container">
+      <video autoplay loop muted playsinline poster="assets/images/project1-thumb.png">
+        <source src="assets/videos/demo-clip.mp4" type="video/mp4">
+        브라우저가 비디오 태그를 지원하지 않습니다.
+      </video>
+    </div>
+    <div class="project-info">
+      <h3>2D 액션 게임 프로젝트</h3>
+      <p class="description">
+        Unity와 C# 기반으로 제작한 보스전 탄막 피하기 게임입니다. 보스 패턴 상태 머신 및 물리 충돌 로직을 구현했습니다.
+      </p>
+      <ul class="tech-stack">
+        <li>Unity</li>
+        <li>C#</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/..." target="_blank" class="btn">GitHub 코드</a>
+        <a href="assets/docs/project-spec.pdf" target="_blank" class="btn btn-secondary">기획서 PDF 보기</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-card">
+    <div class="media-container">
+      <img src="assets/gifs/demo-gameplay.gif" alt="기능 시연 애니메이션" loading="lazy">
+    </div>
+    <div class="project-info">
+      <h3>AI 기반 데이터 분석 파이프라인</h3>
+      <p class="description">
+        대용량 데이터를 전처리하고 모델 예측 결과를 실시간으로 시각화하는 웹 대시보드 프로젝트입니다.
+      </p>
+      <ul class="tech-stack">
+        <li>Python</li>
+        <li>FastAPI</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/..." target="_blank" class="btn">GitHub 코드</a>
+      </div>
+    </div>
+  </article>
+</section>
