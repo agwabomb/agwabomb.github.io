@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#020617"/>
+  <ellipse cx="480" cy="270" rx="70" ry="48" fill="#0f172a" stroke="#22d3ee"/>
+  <text x="480" y="276" text-anchor="middle" fill="#e0f2fe" font-size="16" font-family="sans-serif">HIGH</text>
+  <path d="M200 270 C280 140 400 140 410 230" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <path d="M760 270 C680 140 560 140 550 230" fill="none" stroke="#818cf8" stroke-width="3"/>
+  <path d="M220 360 C320 430 420 430 450 320" fill="none" stroke="#22d3ee" stroke-width="3" stroke-dasharray="8 8"/>
+  <path d="M740 360 C640 430 540 430 510 320" fill="none" stroke="#22d3ee" stroke-width="3" stroke-dasharray="8 8"/>
+  <rect x="80" y="240" width="120" height="60" rx="10" fill="#1e293b" stroke="#64748b"/>
+  <rect x="760" y="240" width="120" height="60" rx="10" fill="#1e293b" stroke="#64748b"/>
+  <text x="140" y="276" text-anchor="middle" fill="#cbd5e1" font-size="14" font-family="sans-serif">SPAWN A</text>
+  <text x="820" y="276" text-anchor="middle" fill="#cbd5e1" font-size="14" font-family="sans-serif">SPAWN B</text>
+  <text x="40" y="48" fill="#67e8f9" font-family="monospace" font-size="16">SIGHTLINE / LOOP SLOT</text>
+  <text x="40" y="500" fill="#94a3b8" font-size="18" font-family="sans-serif">Replace with flow diagram</text>
+</svg>

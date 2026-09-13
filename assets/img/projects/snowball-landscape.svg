@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#020617"/>
+  <g fill="none" stroke="#38bdf8" stroke-opacity=".45" stroke-width="1.5">
+    <path d="M40 420 L180 300 L320 340 L500 220 L680 280 L920 180"/>
+    <path d="M40 460 L200 360 L360 400 L540 300 L760 340 L920 250"/>
+    <path d="M180 300 L180 460 M320 340 L320 470 M500 220 L500 480 M680 280 L680 470"/>
+  </g>
+  <circle cx="500" cy="220" r="7" fill="#22d3ee"/>
+  <text x="40" y="48" fill="#67e8f9" font-family="monospace" font-size="16">WIREFRAME SLOT</text>
+  <text x="40" y="500" fill="#94a3b8" font-family="sans-serif" font-size="18">Replace with landscape GIF/PNG</text>
+</svg>

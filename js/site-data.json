@@ -1,0 +1,144 @@
+{
+  "profile": {
+    "handle": "agwabomb",
+    "role": "게임 시스템 & 레벨 기획자",
+    "education": "연세대학교 천문우주학과 학사 및 석사 졸업",
+    "stacks": [
+      "Unreal Engine",
+      "Unity",
+      "C#",
+      "Python",
+      "Git/GitHub",
+      "AI-Assisted Prototyping"
+    ],
+    "links": {
+      "email": {
+        "label": "Contact 이메일",
+        "href": "mailto:zaqxsw0517b@gmail.com"
+      },
+      "github": {
+        "label": "GitHub",
+        "href": "https://github.com/agwabomb"
+      },
+      "blog": {
+        "label": "개인 블로그",
+        "href": "https://blanktie.tistory.com"
+      },
+      "itch": {
+        "label": "itch.io 프로토타입",
+        "href": "https://agwabomb.itch.io"
+      }
+    }
+  },
+  "philosophy": [
+    {
+      "title": "교전 순환 동선",
+      "body": "한 번의 교전이 맵을 끝내지 않게 합니다. 시야 차단, 우회로, 재집결 지점을 같은 루프에 묶어 패배한 쪽도 다시 붙을 수 있게 설계합니다."
+    },
+    {
+      "title": "상태 머신",
+      "body": "레벨보다 전이 규칙을 먼저 닫습니다. 입력이 세계를 어떻게 바꾸는지가 분명해야, 공간이 퍼즐이 되고 버그가 되지 않습니다."
+    },
+    {
+      "title": "난이도 곡선",
+      "body": "에임이나 수치만으로 올리지 않습니다. 안전 습관을 심은 뒤 그 습관을 회수하는 쪽이, 플레이어가 규칙을 내 것으로 만드는 곡선입니다."
+    },
+    {
+      "title": "가설 검증형 밸런싱",
+      "body": "가설을 수치로 적고, 플레이테스트로 오차를 줄입니다. 재현되지 않는 재미는 운이고, 재현되는 재미는 시트에 남습니다."
+    }
+  ],
+  "career": [
+    {
+      "period": "Research",
+      "title": "관측·시뮬레이션 데이터의 오차 통제",
+      "org": "연세대학교 천문우주학과 학사",
+      "body": "신호와 노이즈를 가르고, 측정 조건을 고정한 뒤 남는 오차를 설명하는 훈련을 했습니다. 지금의 밸런싱은 그 습관의 연장선입니다."
+    },
+    {
+      "period": "Thesis",
+      "title": "SCIE 논문과 재현 가능한 실험 설계",
+      "org": "연세대학교 천문우주학과 석사",
+      "body": "가설, 통제 변수, 검증 절차를 문서로 남기는 일을 반복했습니다. 기획서의 시스템 룰 표와 보스 페이즈 시트는 같은 문법으로 쓹니다."
+    },
+    {
+      "period": "Transition",
+      "title": "연구 노트를 레벨에 옮기다",
+      "org": "그레이박스 프로토타이핑 및 수치 고정",
+      "body": "지형 스케일, 엄폐 간격, 중력 전이 딜레이처럼 손맛으로 보이던 값을 먼저 그레이박스로 고정했습니다. 아트보다 동선과 실패 피드백을 먼저 닫습니다."
+    },
+    {
+      "period": "Practice",
+      "title": "시스템 룰 × 레벨 동선 협업 실무",
+      "org": "Snowball Battleground & Gravita",
+      "body": "캐주얼 슈팅 전장에서는 레벨이 교전 빈도를 설계하고, Gravita에서는 상태 머신이 공간을 다시 읽게 만들었습니다."
+    }
+  ],
+  "ui": {
+    "all": "전체",
+    "viewPost": "상세 기획서 & 포스트 보기 →",
+    "backToList": "← 목록으로 돌아가기",
+    "itchBuild": "itch.io 빌드",
+    "loadingPost": "포스트를 불러오는 중입니다…",
+    "period": "개발 기간",
+    "engine": "엔진 / 스택",
+    "role": "담당 역할",
+    "contribution": "기여도",
+    "playtimeUnknown": "플레이타임 미기록",
+    "fallbackData": "로컬 폴백 데이터",
+    "mergedData": "Steam + Custom 병합",
+    "emptyComment": "기획 코멘트는 custom-games.json에서 추가할 수 있습니다.",
+    "openAnalysis": "기획 분석 보기 →",
+    "mdError": "마크다운 포스트를 불러오지 못했습니다. 로컬에서는 python -m http.server 로 열어 주세요."
+  },
+  "fallbackCustomGames": [
+    {
+      "title": "Arc Raiders",
+      "platform": "PlayStation 5",
+      "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg",
+      "playtime": "38h",
+      "genre": [
+        "Extraction Shooter",
+        "PvPvE"
+      ],
+      "comment": "추출 루프의 정보 비대칭이 동선을 어떻게 조이는지, 리스크 대비 보상 곡선이 교전 빈도를 조절하는 방식을 역기획.",
+      "blogUrl": "https://blanktie.tistory.com"
+    },
+    {
+      "title": "Ghost Trick: Phantom Detective",
+      "platform": "Nintendo Switch",
+      "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1967430/header.jpg",
+      "playtime": "12h",
+      "genre": [
+        "Puzzle",
+        "Adventure"
+      ],
+      "comment": "빙의 가능한 오브젝트만으로 규칙을 가르치고, 시간 되감기로 ‘실패 비용’을 낮춘 비언어적 퍼즐 튜토리얼 설계.",
+      "blogUrl": "https://blanktie.tistory.com"
+    },
+    {
+      "title": "Ori and the Blind Forest",
+      "platform": "Steam",
+      "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg",
+      "playtime": "18h",
+      "genre": [
+        "Metroidvania",
+        "Platformer"
+      ],
+      "comment": "능력 해금이 동선을 재해석하게 만드는 게이트, 그리고 사망을 학습 루프로 쓰는 난이도 곡선.",
+      "blogUrl": "https://blanktie.tistory.com"
+    },
+    {
+      "title": "Hades",
+      "platform": "Steam",
+      "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
+      "playtime": "64h",
+      "genre": [
+        "Roguelike",
+        "Action"
+      ],
+      "comment": "런 실패를 서사 보상으로 환원하는 메타 진행, 보스 패턴과 빌드 시너지의 밸런싱 여지를 분석.",
+      "blogUrl": ""
+    }
+  ]
+}

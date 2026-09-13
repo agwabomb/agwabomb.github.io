@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#g)"/>
+  <circle cx="480" cy="270" r="110" fill="none" stroke="#22d3ee" stroke-opacity=".4" stroke-width="2"/>
+  <line x1="480" y1="80" x2="480" y2="190" stroke="#67e8f9" stroke-width="3"/>
+  <line x1="480" y1="350" x2="480" y2="460" stroke="#818cf8" stroke-width="3"/>
+  <line x1="190" y1="270" x2="370" y2="270" stroke="#38bdf8" stroke-width="3"/>
+  <line x1="590" y1="270" x2="770" y2="270" stroke="#60a5fa" stroke-width="3"/>
+  <circle cx="480" cy="270" r="10" fill="#22d3ee"/>
+  <text x="40" y="56" fill="#a5b4fc" font-family="Outfit, sans-serif" font-size="18" letter-spacing="4">UNITY 2D ù STATE MACHINE</text>
+  <text x="40" y="500" fill="#e2e8f0" font-family="Outfit, sans-serif" font-size="28">Gravita / Gravity Reversal</text>
+</svg>

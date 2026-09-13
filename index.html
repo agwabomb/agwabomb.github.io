@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23020617'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%2322d3ee' stroke-width='2'/%3E%3Cpath d='M16 6v4M16 22v4M6 16h4M22 16h4' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,16 +19,6 @@
           fontFamily: {
             sans: ["Pretendard Variable", "Pretendard", "Outfit", "system-ui", "sans-serif"],
             display: ["Outfit", "Pretendard Variable", "sans-serif"],
-          },
-          colors: {
-            ink: {
-              950: "#020617",
-              900: "#0f172a",
-              850: "#111827",
-            },
-          },
-          boxShadow: {
-            glow: "0 0 40px rgba(34, 211, 238, 0.12)",
           },
         },
       },
@@ -41,29 +31,34 @@
       background-color: #020617;
       background-image:
         radial-gradient(ellipse 80% 50% at 10% -10%, rgba(56, 189, 248, 0.16), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 90% 0%, rgba(99, 102, 241, 0.14), transparent 50%),
-        radial-gradient(ellipse 40% 30% at 50% 100%, rgba(14, 165, 233, 0.08), transparent 50%);
+        radial-gradient(ellipse 50% 40% at 90% 0%, rgba(99, 102, 241, 0.14), transparent 50%);
     }
     .nav-blur {
       background: rgba(2, 6, 23, 0.78);
       backdrop-filter: blur(16px);
     }
-    .reveal {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: rise 0.7s ease forwards;
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 0.15rem 0.9rem;
+      color: #cbd5e1;
+      font-size: 0.875rem;
+      white-space: nowrap;
     }
-    .reveal-delay-1 { animation-delay: 0.08s; }
-    .reveal-delay-2 { animation-delay: 0.16s; }
-    .reveal-delay-3 { animation-delay: 0.24s; }
-    @keyframes rise {
-      to { opacity: 1; transform: translateY(0); }
+    .nav-link:hover { color: #67e8f9; }
+    .nav-link.is-active {
+      color: #67e8f9;
     }
-    .grid-noise {
-      background-image:
-        linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-      background-size: 48px 48px;
+    .nav-link.is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: #22d3ee;
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.7);
     }
     #menu-toggle {
       display: inline-flex;
@@ -85,103 +80,142 @@
       #desktop-nav { display: flex; }
       #mobile-nav { display: none !important; }
     }
+    .article-body { color: #cbd5e1; line-height: 1.8; }
+    .article-body h2 {
+      margin: 2.25rem 0 0.85rem;
+      font-family: Outfit, Pretendard Variable, sans-serif;
+      font-size: 1.4rem;
+      color: #f1f5f9;
+    }
+    .article-body p { margin: 0.85rem 0; }
+    .article-body ul, .article-body ol { margin: 0.85rem 0 0.85rem 1.2rem; }
+    .article-body li { margin: 0.35rem 0; }
+    .article-body figure { margin: 1.5rem 0 2rem; }
+    .article-body img {
+      width: 100%;
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      background: #0f172a;
+    }
+    .article-body figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+    .article-body table {
+      width: 100%;
+      margin: 1.25rem 0 1.75rem;
+      font-size: 0.875rem;
+      border-collapse: collapse;
+    }
+    .article-body th, .article-body td {
+      border: 1px solid #1e293b;
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .article-body th { background: #0f172a; color: #67e8f9; }
+    .grid-noise {
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased">
   <a href="#about" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-cyan-400 focus:px-3 focus:py-2 focus:text-slate-950">본문으로 건너뛰기</a>
 
-  <nav class="nav-blur fixed inset-x-0 top-0 z-40 border-b border-slate-800/80">
-    <div class="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:pr-6">
-      <a href="#about" class="font-display text-sm font-semibold tracking-[0.18em] text-cyan-300">AGWABOMB</a>
+  <nav class="nav-blur sticky top-0 z-40 border-b border-slate-800/80">
+    <div class="relative mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
+      <a href="#about" class="font-display py-3 text-sm font-semibold tracking-[0.18em] text-cyan-300">AGWABOMB</a>
       <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
         Menu
       </button>
-      <ul id="desktop-nav" class="items-center gap-6 whitespace-nowrap text-sm text-slate-300">
-        <li class="shrink-0"><a class="whitespace-nowrap transition hover:text-cyan-300" href="#about">소개</a></li>
-        <li class="shrink-0"><a class="whitespace-nowrap transition hover:text-cyan-300" href="#projects">프로젝트</a></li>
-        <li class="shrink-0"><a class="whitespace-nowrap transition hover:text-cyan-300" href="#archive">역기획 로그</a></li>
-        <li class="shrink-0"><a class="whitespace-nowrap transition hover:text-cyan-300" href="#career">커리어</a></li>
-        <li class="shrink-0"><a class="whitespace-nowrap rounded-full bg-cyan-400/10 px-3 py-1.5 text-cyan-300 ring-1 ring-cyan-400/30 transition hover:bg-cyan-400/20" href="#contact">Contact</a></li>
+      <ul id="desktop-nav" class="items-center gap-7">
+        <li><a class="nav-link" data-nav="about" href="#about">About Me</a></li>
+        <li><a class="nav-link" data-nav="projects" href="#projects">Projects</a></li>
+        <li><a class="nav-link" data-nav="games" href="#games">Playlist</a></li>
+        <li><a class="nav-link" data-nav="career" href="#career">Career</a></li>
       </ul>
     </div>
-    <div id="mobile-nav" class="hidden border-t border-slate-800 px-4 py-3">
-      <ul class="flex flex-col gap-3 text-sm text-slate-300">
-        <li><a href="#about">소개</a></li>
-        <li><a href="#projects">프로젝트</a></li>
-        <li><a href="#archive">역기획 로그</a></li>
-        <li><a href="#career">커리어</a></li>
-        <li><a href="#contact">Contact</a></li>
+    <div id="mobile-nav" class="hidden border-t border-slate-800 px-4 py-3 lg:hidden">
+      <ul class="flex flex-col gap-1 text-sm">
+        <li><a class="nav-link block w-full py-2" data-nav="about" href="#about">About Me</a></li>
+        <li><a class="nav-link block w-full py-2" data-nav="projects" href="#projects">Projects</a></li>
+        <li><a class="nav-link block w-full py-2" data-nav="games" href="#games">Playlist</a></li>
+        <li><a class="nav-link block w-full py-2" data-nav="career" href="#career">Career</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    <section id="about" class="relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:pt-32">
-      <div class="grid-noise pointer-events-none absolute inset-0 opacity-40"></div>
-      <div class="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-        <div>
-          <p class="reveal font-display text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">Game Systems &amp; Level Design</p>
-          <h1 class="reveal reveal-delay-1 mt-4 font-display text-3xl font-semibold leading-snug text-slate-100 sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
-            방대한 데이터 속 오차를 줄여가던 연구자적 사고로
-            <span class="mt-1 block bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">도파민 공식을 설계하는 게임 기획자</span>
-          </h1>
-          <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-            시스템 룰, 레벨 동선, 비언어적 튜토리얼, 데이터 밸런싱을 한 축으로 봅니다.
-            연세대학교 천문우주학과 학사 및 석사 과정에서 익힌 오차 통제와 재현 가능한 실험 설계를,
-            엔진 그레이박스 위에서 플레이어가 체감하는 보상 루프로 옮깁니다.
-          </p>
-          <div id="stack-badges" class="reveal reveal-delay-3 mt-8 flex flex-wrap gap-2"></div>
-          <div id="hero-actions" class="reveal reveal-delay-3 mt-8 flex flex-wrap gap-3"></div>
-        </div>
-
-        <aside class="reveal reveal-delay-2 rounded-3xl border border-slate-800 bg-slate-900/70 p-6 shadow-glow">
-          <div class="flex items-center gap-4">
-            <img src="assets/img/avataaars.svg" alt="프로필 아바타" class="h-20 w-20 rounded-2xl bg-slate-800 ring-1 ring-cyan-400/30" />
-            <div>
-              <p class="font-display text-xl font-semibold">agwabomb</p>
-              <p class="text-sm text-slate-400">게임 시스템 &amp; 레벨 기획자</p>
-            </div>
-          </div>
-          <dl class="mt-6 space-y-4 text-sm">
-            <div>
-              <dt class="text-xs uppercase tracking-wider text-slate-500">학력</dt>
-              <dd class="mt-1 text-slate-200">연세대학교 천문우주학과 학사 및 석사 졸업</dd>
-            </div>
-            <div>
-              <dt class="text-xs uppercase tracking-wider text-slate-500">기획 초점</dt>
-              <dd class="mt-1 text-slate-200">교전 순환 동선 · 상태 머신 · 난이도 곡선 · 역기획</dd>
-            </div>
-            <div>
-              <dt class="text-xs uppercase tracking-wider text-slate-500">방법론</dt>
-              <dd class="mt-1 text-slate-300">가설을 수치로 세우고, 플레이 루프로 검증한 뒤 오차를 줄입니다. 연구 노트가 곧 밸런싱 시트입니다.</dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
-    </section>
-
-    <section id="projects" class="border-t border-slate-800/80 px-4 py-20 sm:px-6">
-      <div class="mx-auto max-w-6xl">
-        <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <section id="about" data-view="about" class="hidden px-4 pb-16 pt-10 sm:px-6 lg:pt-14">
+      <div class="relative mx-auto max-w-6xl">
+        <div class="grid-noise pointer-events-none absolute inset-0 opacity-30"></div>
+        <div class="relative grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Featured Work</p>
-            <h2 class="mt-2 font-display text-3xl font-semibold">핵심 기획 프로젝트</h2>
+            <p class="font-display text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">Game Systems &amp; Level Design</p>
+            <h1 class="mt-4 font-display text-3xl font-semibold leading-snug text-slate-100 sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+              방대한 데이터 속 오차를 줄여가던 연구자적 사고로
+              <span class="mt-1 block bg-gradient-to-r from-sky-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">도파민 공식을 설계하는 게임 기획자</span>
+            </h1>
+            <p class="mt-6 max-w-2xl text-base leading-7 text-slate-300">
+              시스템 룰, 레벨 동선, 비언어적 튜토리얼, 데이터 밸런싱을 한 축으로 봅니다.
+              연세대학교 천문우주학과 학사 및 석사 과정에서 익힌 오차 통제와 재현 가능한 실험 설계를,
+              엔진 그레이박스 위에서 플레이어가 체감하는 보상 루프로 옮깁니다.
+            </p>
+            <p class="mt-3 text-sm text-slate-400">학력 · 연세대학교 천문우주학과 학사 및 석사 졸업</p>
+            <div id="stack-badges" class="mt-8 flex flex-wrap gap-2"></div>
+            <div id="hero-actions" class="mt-8 flex flex-wrap gap-3"></div>
           </div>
-          <p class="max-w-md text-sm text-slate-400">레벨이 시스템 룰을 가르치고, 시스템이 동선을 다시 읽게 만드는 두 개의 케이스 스터디입니다.</p>
+          <aside class="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
+            <div class="flex items-center gap-4">
+              <img src="assets/img/avataaars.svg" alt="프로필 아바타" class="h-20 w-20 rounded-2xl bg-slate-800 ring-1 ring-cyan-400/30" />
+              <div>
+                <p class="font-display text-xl font-semibold">agwabomb</p>
+                <p class="text-sm text-slate-400">게임 시스템 &amp; 레벨 기획자</p>
+              </div>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-slate-400">가설을 수치로 세우고, 플레이 루프로 검증한 뒤 오차를 줄입니다. 연구 노트가 곧 밸런싱 시트입니다.</p>
+          </aside>
         </div>
-        <div id="project-grid" class="grid gap-6 lg:grid-cols-2"></div>
+        <div class="relative mt-14">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Planning Philosophy</p>
+          <h2 class="mt-2 font-display text-2xl font-semibold">기획 철학 및 방법론</h2>
+          <div id="philosophy-grid" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+        </div>
       </div>
     </section>
 
-    <section id="archive" class="border-t border-slate-800/80 px-4 py-20 sm:px-6">
+    <section id="projects" data-view="projects" class="hidden px-4 pb-16 pt-10 sm:px-6 lg:pt-14">
+      <div class="mx-auto max-w-6xl">
+        <div id="projects-list">
+          <div class="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Featured Work</p>
+              <h1 class="mt-2 font-display text-3xl font-semibold">핵심 기획 프로젝트</h1>
+            </div>
+            <p class="max-w-md text-sm text-slate-400">레벨이 시스템 룰을 가르치고, 시스템이 동선을 다시 읽게 만드는 케이스 스터디입니다. 카드를 누르면 상세 기획 포스트가 열립니다.</p>
+          </div>
+          <div id="project-grid" class="grid gap-6 lg:grid-cols-2"></div>
+        </div>
+
+        <article id="project-detail" class="hidden">
+          <div id="project-detail-header"></div>
+          <div id="project-detail-body" class="article-body mx-auto mt-10 max-w-3xl"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="games" data-view="games" class="hidden px-4 pb-16 pt-10 sm:px-6 lg:pt-14">
       <div class="mx-auto max-w-6xl">
         <div class="mb-8">
           <p class="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">Played Games &amp; Deconstruction Log</p>
-          <h2 class="mt-2 font-display text-3xl font-semibold">플레이 및 역기획 아카이브</h2>
+          <h1 class="mt-2 font-display text-3xl font-semibold">플레이 및 역기획 아카이브</h1>
           <p class="mt-3 max-w-2xl text-sm text-slate-400">Steam 라이브러리와 수동 분석 기록을 타이틀 기준으로 병합합니다. 콘솔·스위치 타이틀과 기획 한 줄 평, 블로그 역기획을 한 그리드에서 봅니다.</p>
         </div>
-
         <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div id="genre-filters" class="flex flex-wrap gap-2" role="tablist" aria-label="장르 필터"></div>
           <label class="inline-flex cursor-pointer items-center gap-3 self-start rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-300">
@@ -189,25 +223,24 @@
             기획 분석글 있는 게임만 보기
           </label>
         </div>
-
         <p id="archive-status" class="mb-4 text-xs text-slate-500"></p>
         <div id="game-grid" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"></div>
         <p id="game-empty" class="hidden rounded-2xl border border-dashed border-slate-700 px-6 py-16 text-center text-slate-400">조건에 맞는 게임이 없습니다. 필터를 바꿔 보세요.</p>
       </div>
     </section>
 
-    <section id="career" class="border-t border-slate-800/80 px-4 py-20 sm:px-6">
+    <section id="career" data-view="career" class="hidden px-4 pb-16 pt-10 sm:px-6 lg:pt-14">
       <div class="mx-auto max-w-6xl">
         <p class="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">Career &amp; Dev Log</p>
-        <h2 class="mt-2 font-display text-3xl font-semibold">연구 노트에서 그레이박스로</h2>
+        <h1 class="mt-2 font-display text-3xl font-semibold">연구 노트에서 그레이박스로</h1>
         <p class="mt-3 max-w-2xl text-sm text-slate-400">시뮬레이션 오차를 줄이던 습관이, 엔진 위에서는 밸런싱 수치와 교전 루프의 재현성으로 이어집니다.</p>
-        <ol id="career-timeline" class="relative mt-12 space-y-0 border-l border-slate-800 pl-6 sm:pl-8"></ol>
+        <ol id="career-timeline" class="mt-10 grid gap-5 lg:grid-cols-2"></ol>
       </div>
     </section>
   </main>
 
-  <footer id="contact" class="border-t border-slate-800 bg-slate-950 px-4 py-12 sm:px-6">
-    <div class="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+  <footer class="border-t border-slate-800 bg-slate-950 px-4 py-10 sm:px-6">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p class="font-display text-lg font-semibold tracking-wide text-cyan-300">AGWABOMB</p>
         <p class="mt-2 text-sm text-slate-400">게임 시스템 &amp; 레벨 기획자 · 시스템 룰 / 동선 / 밸런싱 / 역기획</p>
@@ -217,398 +250,8 @@
     </div>
   </footer>
 
-  <script>
-    const PROFILE = {
-      handle: "agwabomb",
-      role: "게임 시스템 & 레벨 기획자",
-      usp: "방대한 데이터 속 오차를 줄여가던 연구자적 사고로 도파민 공식을 설계하는 게임 기획자",
-      education: "연세대학교 천문우주학과 학사 및 석사 졸업",
-      stacks: ["Unreal Engine", "Unity", "C#", "Python", "Git/GitHub", "AI-Assisted Prototyping"],
-      links: {
-        email: { label: "Contact 이메일", href: "mailto:agwabomb@gmail.com" },
-        github: { label: "GitHub", href: "https://github.com/agwabomb" },
-        blog: { label: "역기획 블로그", href: "https://agwabomb.tistory.com" },
-        itch: { label: "itch.io 프로토타입", href: "https://agwabomb.itch.io" },
-      },
-    };
-
-    const projects = [
-      {
-        id: "snowball",
-        kicker: "Project 01 · Unreal Engine",
-        title: "Snowball Battleground",
-        subtitle: "가제",
-        role: "전장 레벨 기획 및 Landscape 지형 조형 100%",
-        tags: ["레벨 디자인", "Landscape", "교전 동선", "긴 TTK"],
-        summary: "느린 곡사 투사체와 높은 TTK가 전제를 바꿉니다. 한 방에 끝나지 않는 교전을 위해, 개방형 실외 전장에 ‘다시 붙을 수 있는’ 순환 동선을 심었습니다.",
-        intents: [
-          "곡사 탄도와 긴 TTK를 고려한 시야·사거리 레이어의 개방형 실외 전장",
-          "중앙 고지대 시야 차단과 이중 능선 협곡으로 지속적 교전 루프 구축",
-          "비대칭 우회로와 마이크로 엄폐물로 돌입·이탈·재집결의 선택지 제공",
-        ],
-        visual: "snow",
-        links: [],
-      },
-      {
-        id: "gravita",
-        kicker: "Project 02 · Unity 2D WebGL",
-        title: "Gravita",
-        subtitle: "Gravity Reversal",
-        role: "1인 시스템 룰 및 레벨 기획, Unity 2D WebGL 프로토타이핑 100%",
-        tags: ["시스템 룰", "상태 머신", "비언어적 튜토리얼", "보스 밸런싱"],
-        summary: "중력을 네 방향으로 뒤집는 코어 상태 머신을 먼저 정의하고, 텍스트 없이 공간만으로 규칙을 가르친 뒤, 안전 습관을 의도적으로 배신하는 난이도 곡선을 설계했습니다.",
-        intents: [
-          "4방향 중력 반전 코어 상태 머신과 전이 규칙을 수치·애니메이션 타이밍까지 고정",
-          "5단계 비언어적 튜토리얼로 입력 → 세계 반응 → 이동 가능성을 순차 해금",
-          "1페이즈 안전지대 습관을 2페이즈 6개 낙사 구멍 개방으로 파괴하는 심리적 난이도 곡선",
-        ],
-        visual: "gravity",
-        links: [{ label: "itch.io 플레이어블 빌드", href: "https://agwabomb.itch.io/gravita" }],
-      },
-    ];
-
-    const career = [
-      {
-        period: "Research",
-        title: "관측·시뮬레이션 데이터의 오차 통제",
-        org: "연세대학교 천문우주학과 학사",
-        body: "신호와 노이즈를 가르고, 측정 조건을 고정한 뒤 남는 오차를 설명하는 훈련을 했습니다. 지금의 밸런싱은 그 습관의 연장선입니다. 수치가 흔들리면 플레이 루프가 흔들립니다.",
-      },
-      {
-        period: "Thesis",
-        title: "SCIE 논문과 재현 가능한 실험 설계",
-        org: "연세대학교 천문우주학과 석사",
-        body: "가설, 통제 변수, 검증 절차를 문서로 남기는 일을 반복했습니다. 기획서의 시스템 룰 표, 보스 페이즈 시트, 드랍 곡선은 같은 문법으로 씁니다. 재현되지 않는 재미는 운입니다.",
-      },
-      {
-        period: "Transition",
-        title: "엔진 그레이박스 프로토타이핑",
-        org: "Unreal Landscape · Unity 2D",
-        body: "연구 노트를 레벨에 옮겼습니다. 지형 스케일, 엄폐 간격, 중력 전이 딜레이처럼 ‘손맛’으로 보이던 값을 먼저 그레이박스로 고정하고, 아트보다 동선과 실패 피드백을 먼저 닫았습니다.",
-      },
-      {
-        period: "Practice",
-        title: "시스템 룰 × 레벨 동선 협업",
-        org: "Snowball Battleground · Gravita",
-        body: "캐주얼 슈팅 전장에서는 레벨이 교전 빈도를 설계하고, Gravita에서는 상태 머신이 공간을 다시 읽게 만들었습니다. 협업 시에도 수치와 동선을 같은 테이블에 올려 교차 검증하는 쪽을 택합니다.",
-      },
-    ];
-
-    const FALLBACK_STEAM_GAMES = [
-      { appId: 1145360, title: "Hades", playtimeHours: 64.2, playtimeMinutes: 3852, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg", platform: "Steam" },
-      { appId: 387290, title: "Ori and the Blind Forest: Definitive Edition", playtimeHours: 18.5, playtimeMinutes: 1110, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg", platform: "Steam" },
-      { appId: 367520, title: "Hollow Knight", playtimeHours: 41.3, playtimeMinutes: 2478, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg", platform: "Steam" },
-      { appId: 504230, title: "Celeste", playtimeHours: 22.1, playtimeMinutes: 1326, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg", platform: "Steam" },
-      { appId: 646570, title: "Slay the Spire", playtimeHours: 73.8, playtimeMinutes: 4428, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg", platform: "Steam" },
-      { appId: 620, title: "Portal 2", playtimeHours: 16.4, playtimeMinutes: 984, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/620/header.jpg", platform: "Steam" },
-    ];
-
-    const FALLBACK_CUSTOM_GAMES = [
-      { title: "Arc Raiders", platform: "PlayStation 5", customImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg", playtime: "38h", genre: ["Extraction Shooter", "PvPvE"], comment: "추출 루프의 정보 비대칭이 동선을 어떻게 조이는지, 리스크 대비 보상 곡선이 교전 빈도를 조절하는 방식을 역기획.", blogUrl: "https://agwabomb.tistory.com" },
-      { title: "Ghost Trick: Phantom Detective", platform: "Nintendo Switch", customImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1967430/header.jpg", playtime: "12h", genre: ["Puzzle", "Adventure"], comment: "빙의 가능한 오브젝트만으로 규칙을 가르치고, 시간 되감기로 ‘실패 비용’을 낮춘 비언어적 퍼즐 튜토리얼 설계.", blogUrl: "https://agwabomb.tistory.com" },
-      { title: "Ori and the Blind Forest", platform: "Steam", customImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg", playtime: "18h", genre: ["Metroidvania", "Platformer"], comment: "능력 해금이 동선을 재해석하게 만드는 게이트, 그리고 사망을 학습 루프로 쓰는 난이도 곡선.", blogUrl: "https://agwabomb.tistory.com" },
-      { title: "Hades", platform: "Steam", customImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg", playtime: "64h", genre: ["Roguelike", "Action"], comment: "런 실패를 서사 보상으로 환원하는 메타 진행, 보스 패턴과 빌드 시너지의 밸런싱 여지를 분석.", blogUrl: "" },
-    ];
-
-    const state = {
-      games: [],
-      activeGenre: "전체",
-      blogOnly: false,
-      sourceLabel: "",
-    };
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    function normalizeTitle(title) {
-      return String(title || "")
-        .toLowerCase()
-        .replace(/[™®©:]/g, " ")
-        .replace(/\b(definitive edition|game of the year|goty|hd remaster|remastered|complete edition)\b/g, " ")
-        .replace(/[^a-z0-9가-힣]+/g, " ")
-        .trim();
-    }
-
-    function titlesMatch(a, b) {
-      const left = normalizeTitle(a);
-      const right = normalizeTitle(b);
-      if (!left || !right) return false;
-      return left === right || left.includes(right) || right.includes(left);
-    }
-
-    function parsePlaytimeHours(value) {
-      if (typeof value === "number" && Number.isFinite(value)) return value;
-      const match = String(value || "").match(/([\d.]+)/);
-      return match ? Number(match[1]) : 0;
-    }
-
-    function formatPlaytime(hours) {
-      if (!hours) return "플레이타임 미기록";
-      return hours >= 10 ? `${Math.round(hours)}h` : `${hours}h`;
-    }
-
-    function unique(list) {
-      return [...new Set(list.filter(Boolean))];
-    }
-
-    function mergeLibraries(steamGames, customGames) {
-      const usedCustom = new Set();
-      const merged = [];
-
-      steamGames.forEach((steam) => {
-        const customIndex = customGames.findIndex((custom, index) => {
-          if (usedCustom.has(index)) return false;
-          if (custom.appId && steam.appId && Number(custom.appId) === Number(steam.appId)) return true;
-          return titlesMatch(custom.title, steam.title);
-        });
-        const custom = customIndex >= 0 ? customGames[customIndex] : null;
-        if (customIndex >= 0) usedCustom.add(customIndex);
-
-        const hours = Number(steam.playtimeHours) || parsePlaytimeHours(steam.playtimeMinutes ? steam.playtimeMinutes / 60 : 0);
-        merged.push({
-          title: steam.title,
-          image: steam.image,
-          playtimeHours: hours,
-          playtimeLabel: formatPlaytime(hours),
-          platforms: unique([steam.platform || "Steam", custom?.platform]),
-          genre: Array.isArray(custom?.genre) ? custom.genre : custom?.genre ? [custom.genre] : [],
-          comment: custom?.comment || "",
-          blogUrl: custom?.blogUrl || "",
-          source: custom ? "merged" : "steam",
-        });
-      });
-
-      customGames.forEach((custom, index) => {
-        if (usedCustom.has(index)) return;
-        const hours = parsePlaytimeHours(custom.playtime);
-        merged.push({
-          title: custom.title,
-          image: custom.customImage,
-          playtimeHours: hours,
-          playtimeLabel: custom.playtime || formatPlaytime(hours),
-          platforms: unique([custom.platform]),
-          genre: Array.isArray(custom.genre) ? custom.genre : custom.genre ? [custom.genre] : [],
-          comment: custom.comment || "",
-          blogUrl: custom.blogUrl || "",
-          source: "custom",
-        });
-      });
-
-      merged.sort((a, b) => (b.playtimeHours || 0) - (a.playtimeHours || 0));
-      return merged;
-    }
-
-    async function loadJson(path) {
-      const response = await fetch(path, { cache: "no-store" });
-      if (!response.ok) throw new Error(`${path} ${response.status}`);
-      const data = await response.json();
-      if (!Array.isArray(data)) throw new Error(`${path} is not an array`);
-      return data;
-    }
-
-    function renderProfile() {
-      document.getElementById("stack-badges").innerHTML = PROFILE.stacks
-        .map((stack) => `<span class="rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-xs text-slate-300">${escapeHtml(stack)}</span>`)
-        .join("");
-
-      const actionClass = {
-        email: "bg-cyan-400 text-slate-950 hover:bg-cyan-300",
-        github: "border border-slate-600 bg-slate-900 text-slate-100 hover:border-cyan-400/60",
-        blog: "border border-indigo-500/40 bg-indigo-500/10 text-indigo-200 hover:bg-indigo-500/20",
-        itch: "border border-sky-500/40 bg-sky-500/10 text-sky-200 hover:bg-sky-500/20",
-      };
-
-      document.getElementById("hero-actions").innerHTML = Object.entries(PROFILE.links)
-        .map(([key, link]) => `<a class="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition ${actionClass[key]}" href="${escapeHtml(link.href)}" ${link.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHtml(link.label)}</a>`)
-        .join("");
-
-      document.getElementById("footer-links").innerHTML = Object.values(PROFILE.links)
-        .map((link) => `<a class="rounded-full border border-slate-700 px-3 py-1.5 text-xs text-slate-300 transition hover:border-cyan-400/50 hover:text-cyan-300" href="${escapeHtml(link.href)}" ${link.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHtml(link.label)}</a>`)
-        .join("");
-    }
-
-    function projectVisual(kind) {
-      if (kind === "gravity") {
-        return `<div class="relative h-44 overflow-hidden bg-gradient-to-br from-indigo-950 via-slate-900 to-cyan-950">
-          <div class="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/30"></div>
-          <div class="absolute left-1/2 top-4 h-20 w-0.5 -translate-x-1/2 bg-gradient-to-b from-cyan-300 to-transparent"></div>
-          <div class="absolute bottom-4 left-1/2 h-20 w-0.5 -translate-x-1/2 bg-gradient-to-t from-indigo-300 to-transparent"></div>
-          <div class="absolute left-4 top-1/2 h-0.5 w-20 -translate-y-1/2 bg-gradient-to-r from-sky-300 to-transparent"></div>
-          <div class="absolute right-4 top-1/2 h-0.5 w-20 -translate-y-1/2 bg-gradient-to-l from-blue-300 to-transparent"></div>
-          <div class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.8)]"></div>
-          <p class="absolute bottom-3 left-4 text-[10px] uppercase tracking-[0.25em] text-cyan-200/70">4-way gravity state</p>
-        </div>`;
-      }
-      return `<div class="relative h-44 overflow-hidden bg-gradient-to-b from-sky-900 via-slate-800 to-slate-950">
-        <div class="absolute -left-6 top-8 h-32 w-48 rounded-t-[90px] bg-slate-300/20"></div>
-        <div class="absolute left-[22%] top-16 h-28 w-56 rounded-t-[70px] bg-slate-950/70"></div>
-        <div class="absolute right-[6%] top-6 h-36 w-44 rounded-t-[80px] bg-slate-200/15"></div>
-        <div class="absolute left-[42%] top-10 h-9 w-28 rounded-full bg-slate-950/80 ring-1 ring-cyan-300/40"></div>
-        <div class="absolute bottom-12 left-[14%] h-5 w-12 rounded-sm bg-cyan-200/30"></div>
-        <div class="absolute bottom-14 left-[38%] h-4 w-9 rounded-sm bg-slate-100/30"></div>
-        <div class="absolute bottom-11 right-[26%] h-5 w-10 rounded-sm bg-cyan-200/25"></div>
-        <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-950"></div>
-        <p class="absolute bottom-3 left-4 text-[10px] uppercase tracking-[0.25em] text-sky-200/80">ridge · sightline · cover</p>
-      </div>`;
-    }
-
-    function renderProjects() {
-      document.getElementById("project-grid").innerHTML = projects.map((project) => `
-        <article class="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/70 shadow-glow transition hover:-translate-y-1 hover:border-cyan-400/30">
-          ${projectVisual(project.visual)}
-          <div class="space-y-4 p-6 sm:p-7">
-            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">${escapeHtml(project.kicker)}</p>
-            <div class="flex flex-wrap items-baseline gap-2">
-              <h3 class="font-display text-2xl font-semibold">${escapeHtml(project.title)}</h3>
-              <span class="text-sm text-slate-500">${escapeHtml(project.subtitle)}</span>
-            </div>
-            <p class="text-sm text-slate-300">${escapeHtml(project.role)}</p>
-            <div class="flex flex-wrap gap-2">${project.tags.map((tag) => `<span class="rounded-full bg-slate-800 px-2.5 py-1 text-[11px] text-slate-300">${escapeHtml(tag)}</span>`).join("")}</div>
-            <p class="text-sm leading-6 text-slate-400">${escapeHtml(project.summary)}</p>
-            <ul class="space-y-2 text-sm text-slate-300">
-              ${project.intents.map((intent) => `<li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400"></span><span>${escapeHtml(intent)}</span></li>`).join("")}
-            </ul>
-            ${project.links.length ? `<div class="pt-2">${project.links.map((link) => `<a class="inline-flex rounded-full bg-cyan-400 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-cyan-300" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join("")}</div>` : ""}
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function renderCareer() {
-      document.getElementById("career-timeline").innerHTML = career.map((item) => `
-        <li class="relative pb-10 last:pb-0">
-          <span class="absolute -left-[29px] top-1.5 h-3 w-3 rounded-full bg-cyan-400 ring-4 ring-slate-950 sm:-left-[37px]"></span>
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-300">${escapeHtml(item.period)}</p>
-          <h3 class="mt-1 font-display text-xl font-semibold">${escapeHtml(item.title)}</h3>
-          <p class="mt-1 text-sm text-cyan-200/80">${escapeHtml(item.org)}</p>
-          <p class="mt-3 text-sm leading-7 text-slate-400">${escapeHtml(item.body)}</p>
-        </li>
-      `).join("");
-    }
-
-    function collectGenres(games) {
-      return ["전체", ...unique(games.flatMap((game) => game.genre))];
-    }
-
-    function filteredGames() {
-      return state.games.filter((game) => {
-        const genreOk = state.activeGenre === "전체" || game.genre.includes(state.activeGenre);
-        const blogOk = !state.blogOnly || Boolean(game.blogUrl);
-        return genreOk && blogOk;
-      });
-    }
-
-    function renderGenreFilters() {
-      const genres = collectGenres(state.games);
-      document.getElementById("genre-filters").innerHTML = genres.map((genre) => {
-        const active = genre === state.activeGenre;
-        return `<button type="button" data-genre="${escapeHtml(genre)}" class="rounded-full px-3 py-1.5 text-xs transition ${active ? "bg-cyan-400 text-slate-950" : "border border-slate-700 bg-slate-900 text-slate-300 hover:border-cyan-400/50"}">${escapeHtml(genre)}</button>`;
-      }).join("");
-    }
-
-    function renderGames() {
-      const games = filteredGames();
-      const grid = document.getElementById("game-grid");
-      const empty = document.getElementById("game-empty");
-      document.getElementById("archive-status").textContent = `${state.sourceLabel} · ${state.games.length}타이틀 중 ${games.length}개 표시`;
-
-      if (!games.length) {
-        grid.innerHTML = "";
-        empty.classList.remove("hidden");
-        return;
-      }
-      empty.classList.add("hidden");
-      grid.innerHTML = games.map((game) => {
-        const comment = game.comment
-          ? `<p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">${escapeHtml(game.comment)}</p>`
-          : `<p class="mt-3 text-sm text-slate-500">기획 코멘트는 custom-games.json에서 추가할 수 있습니다.</p>`;
-        const blog = game.blogUrl
-          ? `<a class="mt-4 inline-flex text-sm font-medium text-cyan-300 hover:text-cyan-200" href="${escapeHtml(game.blogUrl)}" target="_blank" rel="noopener noreferrer">기획 분석 보기 →</a>`
-          : "";
-        const fallback = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 215"><rect fill="#0f172a" width="460" height="215"/></svg>');
-        return `
-          <article class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 transition hover:-translate-y-1 hover:border-cyan-400/30">
-            <div class="relative aspect-[460/215] overflow-hidden bg-slate-800">
-              <img src="${escapeHtml(game.image || fallback)}" alt="${escapeHtml(game.title)} 대표 이미지" class="h-full w-full object-cover" onerror="this.onerror=null;this.src='${fallback}'" />
-              <span class="absolute left-3 top-3 rounded-full bg-slate-950/80 px-2 py-1 text-[10px] uppercase tracking-wide text-cyan-200">${escapeHtml(game.source === "custom" ? "Console / Custom" : game.source === "merged" ? "Steam + 분석" : "Steam")}</span>
-            </div>
-            <div class="p-4 sm:p-5">
-              <h3 class="font-display text-lg font-semibold leading-snug">${escapeHtml(game.title)}</h3>
-              <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
-                <span>${escapeHtml(game.playtimeLabel)}</span>
-                ${game.platforms.map((platform) => `<span class="rounded-full border border-slate-700 px-2 py-0.5 text-slate-300">${escapeHtml(platform)}</span>`).join("")}
-                ${game.genre.map((genre) => `<span class="rounded-full bg-indigo-500/10 px-2 py-0.5 text-indigo-200">${escapeHtml(genre)}</span>`).join("")}
-              </div>
-              ${comment}
-              ${blog}
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    function bindArchiveControls() {
-      document.getElementById("genre-filters").addEventListener("click", (event) => {
-        const button = event.target.closest("[data-genre]");
-        if (!button) return;
-        state.activeGenre = button.dataset.genre;
-        renderGenreFilters();
-        renderGames();
-      });
-      document.getElementById("blog-only-toggle").addEventListener("change", (event) => {
-        state.blogOnly = event.target.checked;
-        renderGames();
-      });
-    }
-
-    function bindNav() {
-      const toggle = document.getElementById("menu-toggle");
-      const panel = document.getElementById("mobile-nav");
-      toggle.addEventListener("click", () => {
-        const open = panel.classList.toggle("hidden") === false;
-        toggle.setAttribute("aria-expanded", String(open));
-      });
-      panel.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          panel.classList.add("hidden");
-          toggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-
-    async function initArchive() {
-      const [steamResult, customResult] = await Promise.all([
-        loadJson("steam-games.json").catch((error) => {
-          console.warn("steam-games.json fallback", error);
-          return null;
-        }),
-        loadJson("custom-games.json").catch((error) => {
-          console.warn("custom-games.json fallback", error);
-          return null;
-        }),
-      ]);
-      const steamGames = Array.isArray(steamResult) ? steamResult : FALLBACK_STEAM_GAMES;
-      const customGames = Array.isArray(customResult) ? customResult : FALLBACK_CUSTOM_GAMES;
-      const usedFallback = !Array.isArray(steamResult) || !Array.isArray(customResult);
-      state.games = mergeLibraries(steamGames, customGames);
-      state.sourceLabel = usedFallback ? "로컬 폴백 데이터" : "Steam + Custom 병합";
-      renderGenreFilters();
-      renderGames();
-    }
-
-    document.getElementById("year").textContent = String(new Date().getFullYear());
-    renderProfile();
-    renderProjects();
-    renderCareer();
-    bindNav();
-    bindArchiveControls();
-    initArchive();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
+  <script src="js/projects-data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
