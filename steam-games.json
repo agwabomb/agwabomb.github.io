@@ -1,0 +1,50 @@
+[
+  {
+    "appId": 1145360,
+    "title": "Hades",
+    "playtimeHours": 64.2,
+    "playtimeMinutes": 3852,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
+    "platform": "Steam"
+  },
+  {
+    "appId": 387290,
+    "title": "Ori and the Blind Forest: Definitive Edition",
+    "playtimeHours": 18.5,
+    "playtimeMinutes": 1110,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg",
+    "platform": "Steam"
+  },
+  {
+    "appId": 367520,
+    "title": "Hollow Knight",
+    "playtimeHours": 41.3,
+    "playtimeMinutes": 2478,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
+    "platform": "Steam"
+  },
+  {
+    "appId": 504230,
+    "title": "Celeste",
+    "playtimeHours": 22.1,
+    "playtimeMinutes": 1326,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg",
+    "platform": "Steam"
+  },
+  {
+    "appId": 646570,
+    "title": "Slay the Spire",
+    "playtimeHours": 73.8,
+    "playtimeMinutes": 4428,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg",
+    "platform": "Steam"
+  },
+  {
+    "appId": 620,
+    "title": "Portal 2",
+    "playtimeHours": 16.4,
+    "playtimeMinutes": 984,
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/620/header.jpg",
+    "platform": "Steam"
+  }
+]
