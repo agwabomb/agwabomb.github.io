@@ -11,8 +11,8 @@
 ## 뷰
 - **About:** USP, 학력(연세대 천문우주 학·석사), 스택 뱃지, Contact/GitHub/블로그/itch.io, 철학 4장(교전 순환 동선 · 상태 머신 · 난이도 곡선 · 가설 검증형 밸런싱)
 - **Projects:** 카드 그리드 → 마크다운 상세 포스트. Snowball Battleground(UE Landscape, 곡사/긴 TTK 교전 루프), Gravita(Unity 2D WebGL, 4방향 중력 상태 머신, itch.io)
-- **Playlist:** `steam_games.json` + `custom_games.json` 병합 카드(`appId` 또는 타이틀 소문자). 1시간 이상만 표시. 12대 장르 필터(`Array.filter` + `includes`). 분석글 토글. 카드에 장르 뱃지 없음.
-- **Career:** 세로 타임라인(좌 시기 YYYY.MM · 중앙 Slate 실선/Cyan 노드 · 우 이력 카드). 모바일은 날짜→카드 세로 스택. 학사 전용 칸은 없음(석사 RESEARCH 설명에 포함)
+- **Playlist (`#games`):** `steam_games.json` + `custom_games.json`을 `Promise.all`로 가져와 병합. `appId` 또는 타이틀 소문자 일치 시 한 장. 플레이타임은 더 긴 쪽, `comment`/`blogUrl`은 커스텀 우선. `playtimeHours >= 1`만 그리드 노출(스팀 0시간이어도 커스텀 1h+면 표시). 콘솔(PS5, Switch 등)도 동일 그리드. 상단 필터는 고정 13버튼(`전체` + 12대 장르), `Array.filter` + `genre.includes`. 「기획 분석글 있는 게임만 보기」 토글 유지. 카드에는 장르 뱃지 없음(배너, 타이틀, `{n}h`, 플랫폼, 코멘트 인용구, 분석 링크만).
+- **Career:** 세로 타임라인(좌 시기 YYYY.MM · 중앙 Slate 실선/Cyan 노드 · 우 이력 카드). 모바일은 날짜→카드 세로 스택. 학사 전용 칸 없음(석사 RESEARCH에 포함)
 
 ## Career 데이터 (현재 4항, 위=과거)
 1. `2022.03 ~ 2025.08` RESEARCH — 석사과정 오차 통제 · CASCADE
@@ -22,22 +22,28 @@
 
 스키마: `period`, `category`, `title`, `subtitle`, `description`, `details[]`, `image`, `links[{label,url}]`. 빈 `image`/`links`는 미렌더. 배열 순서가 곧 화면 순서.
 
+## Playlist 데이터
+- `steam_games.json`: `scripts/export_games_json.py` 로컬 수집. 가족 공유 포함, 계정별 플레이타임을 합쳐 appId당 최댓값. 필드 `appId`, `title`, `playtimeHours`, `image`, `platform: Steam`, `tags`(상점 원본), `genre`(12대: 액션·슈팅·RPG·전략·어드벤처·퍼즐·시뮬레이션·생존·카드·공포·리듬·캐주얼).
+- `custom_games.json`: 콘솔/수동 분석평. 필드 `title`, `platform`, `customImage`, `playtime`(`"38h"`), `genre`, `comment`, `blogUrl`. 코멘트·URL은 덮어쓰지 않고 보존.
+- 현재 커스텀 4건: Arc Raiders(PS5, 코멘트+링크), Ghost Trick(Switch, 코멘트+링크), Ori and the Blind Forest(코멘트+링크), Hades(코멘트만).
+- 장르 필터는 스팀 `genre`(한글 12대) 기준. 커스텀 전용 영문 태그는 `js/app.js`의 alias로 12대에 매핑.
+
 ## 파일
 - `index.html` — 마크업/뷰 컨테이너, 타임라인 CSS
-- `js/app.js` — 라우팅, Steam/Custom 병합, Career 동적 렌더, marked.js 포스트
+- `js/app.js` — 라우팅, Steam/Custom 병합·필터·카드 렌더, Career 동적 렌더, marked.js 포스트
 - `js/site-data.json` — 프로필·철학·UI 문구 (Career 카피 없음)
-- `js/projects-data.js` — 프로젝트 카드/헤더 메타
+- `js/projects-data.js` — 프로젝트 카드/헤더 메타 (`snowball`, `gravita`)
 - `js/careers-data.js` — Career 단일 소스 (`const careers` → `window.CAREERS`)
 - `posts/{id}.md` — 상세 본문. 이미지는 `assets/img/projects/`
 - `assets/career/` — 연혁 증빙 이미지 슬롯 (비어 있으면 `image: ""`)
-- `steam_games.json` — `scripts/export_games_json.py` 로컬 수집(가족 공유 포함, 12대 장르)
-- `custom_games.json` — 콘솔/분석평/`blogUrl` (기존 코멘트·URL 보존)
-- 레거시 금지: `steam-games.json`, `scripts/fetch_steam.py`, `.github/workflows/update-steam.yml` 재생성하지 않음
-- `scripts/write_site_data.py` — `site-data.json` 재생성 (Career 배열 쓰지 않음)
+- `scripts/export_games_json.py` — Steam 라이브러리 → 루트 `steam_games.json`
+- `scripts/write_site_data.py` — `site-data.json` 재생성 (`custom_games.json`을 fallback으로 넣음, Career 배열 쓰지 않음)
+- 사용하지 않음(재생성 금지): `steam-games.json`, `custom-games.json`, `scripts/fetch_steam.py`, GitHub Actions 스팀 자정 워크플로
 
 ## 프로필 링크
-- mailto:zaqxsw0517b@gmail.com · github.com/agwabomb · blanktie.tistory.com · agwabomb.itch.io/gravita
+- mailto:zaqxsw0517b@gmail.com · github.com/agwabomb · blanktie.tistory.com · agwabomb.itch.io (Gravita 빌드: `/gravita`)
 
 ## 제약
 - React/Vue/번들러 도입 금지. 기획 용어(코어 루프, 상태 머신, Pacing, 튜토리얼라이제이션) 유지.
-- 로컬 확인은 `python -m http.server 4173` (file:// 에서 JSON/MD fetch 실패).
+- 로컬 확인은 `python -m http.server 4173` (`file://`에서 JSON/MD fetch 실패).
+- `.cursorignore`가 `steam_games.json`을 가림(대용량). 사이트 fetch 경로이므로 파일 자체는 유지.
