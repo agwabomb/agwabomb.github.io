@@ -1,0 +1,31 @@
+# Git & 시스템 메타데이터
+.git/
+.gitignore
+.DS_Store
+Thumbs.db
+
+# 대용량 자동 수집 데이터 (토큰 소모 주범)
+# ※ custom-games.json은 직접 편집해야 하므로 제외하지 않고 유지합니다.
+steam-games.json
+
+# 미디어 및 바이너리 리소스
+assets/
+images/
+imgs/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.mp4
+*.webm
+*.pdf
+
+# 빌드 및 패키지 캐시 (혹시 생성될 경우 대비)
+node_modules/
+dist/
+build/
+.cache/
+__pycache__/
+*.pyc
