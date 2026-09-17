@@ -60,8 +60,8 @@
     "contribution": "기여도",
     "playtimeUnknown": "플레이타임 미기록",
     "fallbackData": "로컬 폴백 데이터",
-    "mergedData": "Steam + Custom 병합",
-    "emptyComment": "기획 코멘트는 custom-games.json에서 추가할 수 있습니다.",
+    "mergedData": "Steam 등 각종 플랫폼",
+    "emptyComment": "기획 코멘트는 custom_games.json에서 추가할 수 있습니다.",
     "openAnalysis": "기획 분석 보기 →",
     "mdError": "마크다운 포스트를 불러오지 못했습니다. 로컬에서는 python -m http.server 로 열어 주세요."
   },

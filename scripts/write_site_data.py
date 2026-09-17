@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-custom = json.loads((ROOT / "custom-games.json").read_text(encoding="utf-8"))
+custom = json.loads((ROOT / "custom_games.json").read_text(encoding="utf-8"))
 
 data = {
     "profile": {
@@ -49,7 +49,7 @@ data = {
         "playtimeUnknown": "\ud50c\ub808\uc774\ud0c0\uc784 \ubbf8\uae30\ub85d",
         "fallbackData": "\ub85c\uceec \ud3f4\ubc31 \ub370\uc774\ud130",
         "mergedData": "Steam + Custom \ubcd1\ud569",
-        "emptyComment": "\uae30\ud68d \ucf54\uba58\ud2b8\ub294 custom-games.json\uc5d0\uc11c \ucd94\uac00\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+        "emptyComment": "\uae30\ud68d \ucf54\uba58\ud2b8\ub294 custom_games.json\uc5d0\uc11c \ucd94\uac00\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
         "openAnalysis": "\uae30\ud68d \ubd84\uc11d \ubcf4\uae30 \u2192",
         "mdError": "\ub9c8\ud06c\ub2e4\uc6b4 \ud3ec\uc2a4\ud2b8\ub97c \ubd88\ub7ec\uc624\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4. \ub85c\uceec\uc5d0\uc11c\ub294 python -m http.server \ub85c \uc5f4\uc5b4 \uc8fc\uc138\uc694.",
     },

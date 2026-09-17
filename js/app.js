@@ -1,28 +1,53 @@
 const VIEWS = ["about", "projects", "games", "career"];
 const HASH_ALIASES = { archive: "games", playlist: "games", contact: "about" };
+const MIN_PLAYTIME_HOURS = 1;
+const OFFICIAL_GENRES = ["액션", "슈팅", "RPG", "전략", "어드벤처", "퍼즐", "시뮬레이션", "생존", "카드", "공포", "리듬", "캐주얼"];
+const GENRE_FILTERS = ["전체", ...OFFICIAL_GENRES];
+const GENRE_ALIASES = {
+  action: ["액션"],
+  shooter: ["슈팅"],
+  shooting: ["슈팅"],
+  fps: ["슈팅"],
+  tps: ["슈팅"],
+  "extraction shooter": ["슈팅", "생존"],
+  extraction: ["슈팅", "생존"],
+  pvpve: ["슈팅"],
+  rpg: ["RPG"],
+  jrpg: ["RPG"],
+  roguelike: ["RPG", "액션"],
+  roguelite: ["RPG", "액션"],
+  strategy: ["전략"],
+  adventure: ["어드벤처"],
+  puzzle: ["퍼즐"],
+  simulation: ["시뮬레이션"],
+  sim: ["시뮬레이션"],
+  survival: ["생존"],
+  card: ["카드"],
+  "card game": ["카드"],
+  "deck building": ["카드"],
+  horror: ["공포"],
+  rhythm: ["리듬"],
+  music: ["리듬"],
+  casual: ["캐주얼"],
+  metroidvania: ["액션", "어드벤처"],
+  platformer: ["액션"],
+};
 const FALLBACK_STEAM_GAMES = [
-  { appId: 1145360, title: "Hades", playtimeHours: 64.2, playtimeMinutes: 3852, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg", platform: "Steam" },
-  { appId: 387290, title: "Ori and the Blind Forest: Definitive Edition", playtimeHours: 18.5, playtimeMinutes: 1110, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg", platform: "Steam" },
-  { appId: 367520, title: "Hollow Knight", playtimeHours: 41.3, playtimeMinutes: 2478, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg", platform: "Steam" },
-  { appId: 504230, title: "Celeste", playtimeHours: 22.1, playtimeMinutes: 1326, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg", platform: "Steam" },
-  { appId: 646570, title: "Slay the Spire", playtimeHours: 73.8, playtimeMinutes: 4428, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg", platform: "Steam" },
-  { appId: 620, title: "Portal 2", playtimeHours: 16.4, playtimeMinutes: 984, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/620/header.jpg", platform: "Steam" },
+  { appId: 1808500, title: "ARC Raiders", playtimeHours: 217.55, playtimeMinutes: 13053, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg", platform: "Steam", genre: ["슈팅", "생존", "액션"] },
+  { appId: 1245620, title: "ELDEN RING", playtimeHours: 178.84, playtimeMinutes: 10730, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg", platform: "Steam", genre: ["RPG", "액션", "어드벤처"] },
+  { appId: 1145360, title: "Hades", playtimeHours: 0, playtimeMinutes: 0, image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg", platform: "Steam", genre: ["RPG", "액션"] },
 ];
 
 const state = {
   site: { profile: { stacks: [], links: {} }, philosophy: [], career: [], ui: {}, fallbackCustomGames: [] },
   games: [],
-  activeGenre: "",
+  activeGenre: "전체",
   blogOnly: false,
   sourceLabel: "",
 };
 
 function ui(key) {
   return state.site.ui[key] || key;
-}
-
-function pinnedGenres() {
-  return [ui("all") || "All", "Roguelike", "Action", "Extraction", "Metroidvania", "Puzzle"];
 }
 
 function escapeHtml(value) {
@@ -34,20 +59,20 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-function normalizeTitle(title) {
-  return String(title || "")
-    .toLowerCase()
-    .replace(/[\u2122\u00ae\u00a9:]/g, " ")
-    .replace(/\b(definitive edition|game of the year|goty|hd remaster|remastered|complete edition)\b/g, " ")
-    .replace(/[^a-z0-9\uac00-\ud7a3]+/g, " ")
-    .trim();
+function asList(value) {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String);
+  if (value) return [String(value)];
+  return [];
 }
 
-function titlesMatch(a, b) {
-  const left = normalizeTitle(a);
-  const right = normalizeTitle(b);
-  if (!left || !right) return false;
-  return left === right || left.includes(right) || right.includes(left);
+function titleKey(title) {
+  return String(title || "").trim().toLowerCase();
+}
+
+function appIdKey(game) {
+  if (!game || game.appId === undefined || game.appId === null || game.appId === "") return null;
+  const id = Number(game.appId);
+  return Number.isFinite(id) ? id : null;
 }
 
 function parsePlaytimeHours(value) {
@@ -56,13 +81,55 @@ function parsePlaytimeHours(value) {
   return match ? Number(match[1]) : 0;
 }
 
+function hoursFromGame(game) {
+  if (!game) return 0;
+  if (typeof game.playtimeHours === "number" && Number.isFinite(game.playtimeHours)) return game.playtimeHours;
+  return parsePlaytimeHours(game.playtimeHours ?? game.playtime);
+}
+
 function formatPlaytime(hours) {
-  if (!hours) return ui("playtimeUnknown");
-  return hours >= 10 ? `${Math.round(hours)}h` : `${hours}h`;
+  const n = Number(hours) || 0;
+  const shown = n >= 10 ? Math.round(n) : Math.round(n * 10) / 10;
+  return `${shown}h`.replace(/\.0h$/, "h");
 }
 
 function unique(list) {
   return [...new Set(list.filter(Boolean))];
+}
+
+function pickText(...values) {
+  for (const value of values) {
+    const text = String(value || "").trim();
+    if (text) return text;
+  }
+  return "";
+}
+
+function mapGenres(genres) {
+  const mapped = [];
+  const seen = new Set();
+  asList(genres).forEach((raw) => {
+    const token = String(raw).trim();
+    if (!token) return;
+    const officialHits = OFFICIAL_GENRES.includes(token) ? [token] : GENRE_ALIASES[token.toLowerCase()] || [];
+    officialHits.forEach((genre) => {
+      if (seen.has(genre)) return;
+      seen.add(genre);
+      mapped.push(genre);
+    });
+  });
+  return mapped;
+}
+
+function findCustomIndex(customGames, steam, used) {
+  const steamId = appIdKey(steam);
+  const steamTitle = titleKey(steam.title);
+  return customGames.findIndex((custom, index) => {
+    if (used.has(index)) return false;
+    const customId = appIdKey(custom);
+    if (steamId != null && customId != null && steamId === customId) return true;
+    return Boolean(steamTitle) && titleKey(custom.title) === steamTitle;
+  });
 }
 
 function parseRoute() {
@@ -85,50 +152,42 @@ function setHash(hash) {
   window.location.hash = next;
 }
 
+function mergeGameRecord(steam, custom) {
+  const hours = Math.max(hoursFromGame(steam), hoursFromGame(custom));
+  const steamGenres = mapGenres(steam && steam.genre);
+  const customGenres = mapGenres(custom && custom.genre);
+  return {
+    appId: appIdKey(steam) ?? appIdKey(custom),
+    title: (steam && steam.title) || (custom && custom.title) || "",
+    image: pickText(steam && steam.image, custom && custom.image, custom && custom.customImage),
+    playtimeHours: hours,
+    playtimeLabel: formatPlaytime(hours),
+    platforms: unique([steam && (steam.platform || "Steam"), custom && custom.platform]),
+    genre: steamGenres.length ? steamGenres : customGenres,
+    comment: pickText(custom && custom.comment, steam && steam.comment),
+    blogUrl: pickText(custom && custom.blogUrl, steam && steam.blogUrl),
+  };
+}
+
 function mergeLibraries(steamGames, customGames) {
   const usedCustom = new Set();
   const merged = [];
 
   steamGames.forEach((steam) => {
-    const customIndex = customGames.findIndex((custom, index) => {
-      if (usedCustom.has(index)) return false;
-      if (custom.appId && steam.appId && Number(custom.appId) === Number(steam.appId)) return true;
-      return titlesMatch(custom.title, steam.title);
-    });
+    const customIndex = findCustomIndex(customGames, steam, usedCustom);
     const custom = customIndex >= 0 ? customGames[customIndex] : null;
     if (customIndex >= 0) usedCustom.add(customIndex);
-    const hours = Number(steam.playtimeHours) || parsePlaytimeHours(steam.playtimeMinutes ? steam.playtimeMinutes / 60 : 0);
-    merged.push({
-      title: steam.title,
-      image: steam.image,
-      playtimeHours: hours,
-      playtimeLabel: formatPlaytime(hours),
-      platforms: unique([steam.platform || "Steam", custom && custom.platform]),
-      genre: Array.isArray(custom && custom.genre) ? custom.genre : custom && custom.genre ? [custom.genre] : [],
-      comment: (custom && custom.comment) || "",
-      blogUrl: (custom && custom.blogUrl) || "",
-      source: custom ? "merged" : "steam",
-    });
+    merged.push(mergeGameRecord(steam, custom));
   });
 
   customGames.forEach((custom, index) => {
     if (usedCustom.has(index)) return;
-    const hours = parsePlaytimeHours(custom.playtime);
-    merged.push({
-      title: custom.title,
-      image: custom.customImage,
-      playtimeHours: hours,
-      playtimeLabel: custom.playtime || formatPlaytime(hours),
-      platforms: unique([custom.platform]),
-      genre: Array.isArray(custom.genre) ? custom.genre : custom.genre ? [custom.genre] : [],
-      comment: custom.comment || "",
-      blogUrl: custom.blogUrl || "",
-      source: "custom",
-    });
+    merged.push(mergeGameRecord(null, custom));
   });
 
-  merged.sort((a, b) => (b.playtimeHours || 0) - (a.playtimeHours || 0));
-  return merged;
+  return merged
+    .filter((game) => (game.playtimeHours || 0) >= MIN_PLAYTIME_HOURS)
+    .sort((a, b) => (b.playtimeHours || 0) - (a.playtimeHours || 0));
 }
 
 async function loadJson(path) {
@@ -380,30 +439,16 @@ function showProjectList() {
   document.getElementById("project-detail").classList.add("hidden");
 }
 
-function genreMatches(genres, filter) {
-  if (filter === ui("all")) return true;
-  return genres.some((genre) => genre === filter || String(genre).toLowerCase().includes(String(filter).toLowerCase()));
-}
-
-function collectGenres(games) {
-  const pinned = pinnedGenres();
-  const extras = unique(games.flatMap((game) => game.genre)).filter((genre) => {
-    return !pinned.some((item) => item !== ui("all") && (genre === item || String(genre).toLowerCase().includes(String(item).toLowerCase())));
-  });
-  return pinned.concat(extras);
-}
-
 function filteredGames() {
   return state.games.filter((game) => {
-    const genreOk = genreMatches(game.genre, state.activeGenre);
+    const genreOk = state.activeGenre === "전체" || (game.genre || []).includes(state.activeGenre);
     const blogOk = !state.blogOnly || Boolean(game.blogUrl);
     return genreOk && blogOk;
   });
 }
 
 function renderGenreFilters() {
-  const genres = collectGenres(state.games);
-  document.getElementById("genre-filters").innerHTML = genres.map((genre) => {
+  document.getElementById("genre-filters").innerHTML = GENRE_FILTERS.map((genre) => {
     const active = genre === state.activeGenre;
     return `<button type="button" data-genre="${escapeHtml(genre)}" class="rounded-full px-3 py-1.5 text-xs transition ${active ? "bg-cyan-400 text-slate-950" : "border border-slate-700 bg-slate-900 text-slate-300 hover:border-cyan-400/50"}">${escapeHtml(genre)}</button>`;
   }).join("");
@@ -413,7 +458,7 @@ function renderGames() {
   const games = filteredGames();
   const grid = document.getElementById("game-grid");
   const empty = document.getElementById("game-empty");
-  document.getElementById("archive-status").textContent = `${state.sourceLabel} ? ${state.games.length} / ${games.length}`;
+  document.getElementById("archive-status").textContent = `${state.sourceLabel} · 1시간 이상 ${state.games.length} · 표시 ${games.length}`;
 
   if (!games.length) {
     grid.innerHTML = "";
@@ -424,24 +469,22 @@ function renderGames() {
   const fallback = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 215"><rect fill="#0f172a" width="460" height="215"/></svg>');
   grid.innerHTML = games.map((game) => {
     const comment = game.comment
-      ? `<p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">${escapeHtml(game.comment)}</p>`
-      : `<p class="mt-3 text-sm text-slate-500">${escapeHtml(ui("emptyComment"))}</p>`;
+      ? `<blockquote class="mt-4 rounded-2xl border-l-2 border-cyan-400/70 bg-slate-800/70 px-3 py-2 text-sm leading-6 text-slate-300">“${escapeHtml(game.comment)}”</blockquote>`
+      : "";
     const blog = game.blogUrl
       ? `<a class="mt-4 inline-flex text-sm font-medium text-cyan-300 hover:text-cyan-200" href="${escapeHtml(game.blogUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(ui("openAnalysis"))}</a>`
       : "";
-    const sourceLabel = game.source === "custom" ? "Console / Custom" : game.source === "merged" ? "Steam + notes" : "Steam";
+    const platforms = (game.platforms || []).map((platform) => `<span class="rounded-full border border-slate-700 px-2 py-0.5 text-slate-300">${escapeHtml(platform)}</span>`).join("");
     return `
       <article class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 transition hover:-translate-y-1 hover:border-cyan-400/30">
         <div class="relative aspect-[460/215] overflow-hidden bg-slate-800">
           <img src="${escapeHtml(game.image || fallback)}" alt="${escapeHtml(game.title)}" class="h-full w-full object-cover" onerror="this.onerror=null;this.src='${fallback}'" />
-          <span class="absolute left-3 top-3 rounded-full bg-slate-950/80 px-2 py-1 text-[10px] uppercase tracking-wide text-cyan-200">${escapeHtml(sourceLabel)}</span>
         </div>
         <div class="p-4 sm:p-5">
           <h2 class="font-display text-lg font-semibold leading-snug">${escapeHtml(game.title)}</h2>
           <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
             <span>${escapeHtml(game.playtimeLabel)}</span>
-            ${game.platforms.map((platform) => `<span class="rounded-full border border-slate-700 px-2 py-0.5 text-slate-300">${escapeHtml(platform)}</span>`).join("")}
-            ${game.genre.map((genre) => `<span class="rounded-full bg-indigo-500/10 px-2 py-0.5 text-indigo-200">${escapeHtml(genre)}</span>`).join("")}
+            ${platforms}
           </div>
           ${comment}
           ${blog}
@@ -525,12 +568,12 @@ function bindEvents() {
 
 async function initGames() {
   const [steamResult, customResult] = await Promise.all([
-    loadJson("steam-games.json").catch((error) => {
-      console.warn("steam-games.json fallback", error);
+    loadJson("steam_games.json").catch((error) => {
+      console.warn("steam_games.json fallback", error);
       return null;
     }),
-    loadJson("custom-games.json").catch((error) => {
-      console.warn("custom-games.json fallback", error);
+    loadJson("custom_games.json").catch((error) => {
+      console.warn("custom_games.json fallback", error);
       return null;
     }),
   ]);
@@ -548,7 +591,7 @@ async function boot() {
   } catch (error) {
     console.warn("site-data.json fallback", error);
   }
-  state.activeGenre = ui("all");
+  state.activeGenre = "전체";
   if (window.marked && window.marked.setOptions) {
     window.marked.setOptions({ gfm: true, breaks: true });
   }

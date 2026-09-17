@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Arc Raiders",
+    "platform": "PlayStation 5",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg",
+    "playtime": "38h",
+    "genre": ["Extraction Shooter", "PvPvE"],
+    "comment": "추출 루프의 정보 비대칭이 동선을 어떻게 조이는지, 리스크 대비 보상 곡선이 교전 빈도를 조절하는 방식을 역기획.",
+    "blogUrl": "https://blanktie.tistory.com"
+  },
+  {
+    "title": "Ghost Trick: Phantom Detective",
+    "platform": "Nintendo Switch",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1967430/header.jpg",
+    "playtime": "12h",
+    "genre": ["Puzzle", "Adventure"],
+    "comment": "빙의 가능한 오브젝트만으로 규칙을 가르치고, 시간 되감기로 ‘실패 비용’을 낮춘 비언어적 퍼즐 튜토리얼 설계.",
+    "blogUrl": "https://blanktie.tistory.com"
+  },
+  {
+    "title": "Ori and the Blind Forest",
+    "platform": "Steam",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg",
+    "playtime": "18h",
+    "genre": ["Metroidvania", "Platformer"],
+    "comment": "능력 해금이 동선을 재해석하게 만드는 게이트, 그리고 사망을 학습 루프로 쓰는 난이도 곡선.",
+    "blogUrl": "https://blanktie.tistory.com"
+  },
+  {
+    "title": "Hades",
+    "platform": "Steam",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
+    "playtime": "64h",
+    "genre": ["Roguelike", "Action"],
+    "comment": "런 실패를 서사 보상으로 환원하는 메타 진행, 보스 패턴과 빌드 시너지의 밸런싱 여지를 분석.",
+    "blogUrl": ""
+  }
+]

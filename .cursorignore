@@ -5,8 +5,8 @@
 Thumbs.db
 
 # 대용량 자동 수집 데이터 (토큰 소모 주범)
-# ※ custom-games.json은 직접 편집해야 하므로 제외하지 않고 유지합니다.
-steam-games.json
+# ※ custom_games.json은 직접 편집해야 하므로 제외하지 않고 유지합니다.
+steam_games.json
 
 # 미디어 및 바이너리 리소스
 assets/

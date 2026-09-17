@@ -11,7 +11,7 @@
 ## 뷰
 - **About:** USP, 학력(연세대 천문우주 학·석사), 스택 뱃지, Contact/GitHub/블로그/itch.io, 철학 4장(교전 순환 동선 · 상태 머신 · 난이도 곡선 · 가설 검증형 밸런싱)
 - **Projects:** 카드 그리드 → 마크다운 상세 포스트. Snowball Battleground(UE Landscape, 곡사/긴 TTK 교전 루프), Gravita(Unity 2D WebGL, 4방향 중력 상태 머신, itch.io)
-- **Playlist:** Steam+Custom 병합 카드(`appId` 우선, 없으면 타이틀), 장르 필터(`Array.filter`), 분석글 토글
+- **Playlist:** `steam_games.json` + `custom_games.json` 병합 카드(`appId` 또는 타이틀 소문자). 1시간 이상만 표시. 12대 장르 필터(`Array.filter` + `includes`). 분석글 토글. 카드에 장르 뱃지 없음.
 - **Career:** 세로 타임라인(좌 시기 YYYY.MM · 중앙 Slate 실선/Cyan 노드 · 우 이력 카드). 모바일은 날짜→카드 세로 스택. 학사 전용 칸은 없음(석사 RESEARCH 설명에 포함)
 
 ## Career 데이터 (현재 4항, 위=과거)
@@ -30,9 +30,9 @@
 - `js/careers-data.js` — Career 단일 소스 (`const careers` → `window.CAREERS`)
 - `posts/{id}.md` — 상세 본문. 이미지는 `assets/img/projects/`
 - `assets/career/` — 연혁 증빙 이미지 슬롯 (비어 있으면 `image: ""`)
-- `steam-games.json` — Actions 자동 갱신, 수동 편집 금지
-- `custom-games.json` — 콘솔/분석평/`blogUrl` (기존 코멘트·URL 보존)
-- `scripts/fetch_steam.py` + `.github/workflows/update-steam.yml` — 매일 KST 자정 + 수동 dispatch. Secrets: `STEAM_API_KEY`, `STEAM_ID`
+- `steam_games.json` — `scripts/export_games_json.py` 로컬 수집(가족 공유 포함, 12대 장르)
+- `custom_games.json` — 콘솔/분석평/`blogUrl` (기존 코멘트·URL 보존)
+- 레거시 금지: `steam-games.json`, `scripts/fetch_steam.py`, `.github/workflows/update-steam.yml` 재생성하지 않음
 - `scripts/write_site_data.py` — `site-data.json` 재생성 (Career 배열 쓰지 않음)
 
 ## 프로필 링크

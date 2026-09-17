@@ -12,9 +12,8 @@
 - `js/projects-data.js` — 프로젝트 카드/헤더 메타데이터
 - `js/careers-data.js` — Career 세로 타임라인 이력 (`const careers = [...]`)
 - `posts/{id}.md` — 상세 기획 포스트 본문 (사진·GIF·문단은 여기만 수정)
-- `steam-games.json` — GitHub Actions가 갱신. **수동 편집하지 마세요.**
-- `custom-games.json` — 콘솔 타이틀, 기획 한 줄 평, 블로그 링크
-- `scripts/fetch_steam.py` / `.github/workflows/update-steam.yml` — Steam 일일 동기화
+- `steam_games.json` — `scripts/export_games_json.py`가 가족 공유 포함 Steam 라이브러리와 12대 장르를 저장
+- `custom_games.json` — 콘솔 타이틀, 기획 한 줄 평, 블로그 링크
 
 ## 프로젝트 포스트 추가
 
@@ -27,11 +26,7 @@
 
 ## 게임 데이터 병합
 
-`Promise.all`로 두 JSON을 가져온 뒤 타이틀(및 선택적 `appId`) 기준으로 병합합니다. Steam 썸네일·플레이타임 위에 `comment` / `genre` / `blogUrl`을 덮습니다. fetch가 막히면 폴백 배열을 사용합니다.
-
-## Steam 자동 갱신
-
-Settings → Secrets에 `STEAM_API_KEY`, `STEAM_ID`를 등록한 뒤 Actions에서 **Update Steam Games**를 실행합니다.
+`#games`는 `steam_games.json`과 `custom_games.json`을 `Promise.all`로 가져온 뒤 `appId` 또는 타이틀(소문자) 기준으로 병합합니다. 플레이타임은 더 긴 쪽, `comment`/`blogUrl`은 커스텀 파일을 우선합니다. 1시간 미만은 그리드에서 제외하고, 12대 공식 장르 필터는 `Array.filter` + `genre.includes`로 누락 없이 걸러 냅니다.
 
 ## 로컬 확인
 
