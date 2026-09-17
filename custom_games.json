@@ -1,38 +1,52 @@
 [
   {
-    "title": "Arc Raiders",
-    "platform": "PlayStation 5",
-    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg",
-    "playtime": "38h",
-    "genre": ["Extraction Shooter", "PvPvE"],
-    "comment": "추출 루프의 정보 비대칭이 동선을 어떻게 조이는지, 리스크 대비 보상 곡선이 교전 빈도를 조절하는 방식을 역기획.",
-    "blogUrl": "https://blanktie.tistory.com"
+    "title": "64.0",
+    "platform": "Steam",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578850/header.jpg",
+    "playtime": "2.72h",
+    "genre": ["액션",
+      "슈팅",
+      "리듬",
+      "생존"],
+    "comment": "극도로 단순화된 메카닉 속에서 쉬운 반복은 지루함, 어려운 반복은 좌절감의 아슬아슬한 경계를 타는 미니멀리즘 리듬 액션",
+    "blogUrl": "https://blanktie.tistory.com/7"
+  },
+  {
+    "title": "Bear's Restaurant",
+    "platform": "Steam",
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1687550/header.jpg",
+    "playtime": "2.67h",
+    "genre": ["RPG",
+      "어드벤처",
+      "캐주얼",
+      "액션",
+      "시뮬레이션"],
+    "comment": "극도로 절제된 시스템 위에서 잔잔한 픽셀과 BGM으로 죽은 이들의 서사를 풀어내는, 웰메이드 감성 쯔꾸르/스토리 게임",
+    "blogUrl": "https://blanktie.tistory.com/8"
   },
   {
     "title": "Ghost Trick: Phantom Detective",
-    "platform": "Nintendo Switch",
+    "platform": "Steam",
     "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1967430/header.jpg",
-    "playtime": "12h",
-    "genre": ["Puzzle", "Adventure"],
-    "comment": "빙의 가능한 오브젝트만으로 규칙을 가르치고, 시간 되감기로 ‘실패 비용’을 낮춘 비언어적 퍼즐 튜토리얼 설계.",
-    "blogUrl": "https://blanktie.tistory.com"
+    "playtime": "11.37h",
+    "genre": [ "어드벤처",
+      "액션",
+      "퍼즐"],
+    "comment": "시간 역행과 사물 조종이라는 명확한 규칙 위에서 펼쳐지는, 퍼즐과 서사가 완벽히 맞물리는 미스터리 퍼즐",
+    "blogUrl": "https://blanktie.tistory.com/9"
   },
   {
-    "title": "Ori and the Blind Forest",
+    "title": "I Expect You To Die",
     "platform": "Steam",
-    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/387290/header.jpg",
-    "playtime": "18h",
-    "genre": ["Metroidvania", "Platformer"],
-    "comment": "능력 해금이 동선을 재해석하게 만드는 게이트, 그리고 사망을 학습 루프로 쓰는 난이도 곡선.",
-    "blogUrl": "https://blanktie.tistory.com"
-  },
-  {
-    "title": "Hades",
-    "platform": "Steam",
-    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
-    "playtime": "64h",
-    "genre": ["Roguelike", "Action"],
-    "comment": "런 실패를 서사 보상으로 환원하는 메타 진행, 보스 패턴과 빌드 시너지의 밸런싱 여지를 분석.",
-    "blogUrl": ""
+    "customImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/587430/header.jpg",
+    "playtime": "6.5h",
+    "genre": [ "시뮬레이션",
+      "액션",
+      "전략",
+      "어드벤처",
+      "퍼즐",
+      "슈팅"],
+    "comment": "VR의 공간 제한이라는 물리적 한계를 스파이 콘셉트와 완벽히 결합하여, 멀미 스트레스 없이 창의적 퍼즐을 즐기게 만든 VR 퍼즐/방탈출",
+    "blogUrl": "https://blanktie.tistory.com/10"
   }
 ]
