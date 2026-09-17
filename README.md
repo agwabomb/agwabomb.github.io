@@ -8,8 +8,9 @@
 
 - `index.html` — Tailwind CDN 마크업과 뷰 컨테이너
 - `js/app.js` — 해시 라우팅, Steam/커스텀 게임 병합, 화면 렌더
-- `js/site-data.json` — About/Career 카피와 UI 문구
+- `js/site-data.json` — About 카피와 UI 문구
 - `js/projects-data.js` — 프로젝트 카드/헤더 메타데이터
+- `js/careers-data.js` — Career 세로 타임라인 이력 (`const careers = [...]`)
 - `posts/{id}.md` — 상세 기획 포스트 본문 (사진·GIF·문단은 여기만 수정)
 - `steam-games.json` — GitHub Actions가 갱신. **수동 편집하지 마세요.**
 - `custom-games.json` — 콘솔 타이틀, 기획 한 줄 평, 블로그 링크
@@ -19,6 +20,10 @@
 
 1. `js/projects-data.js`에 `id`, 제목, 기간, 엔진, 역할, 커버 경로, `post` 경로를 넣습니다.
 2. `posts/{id}.md`에 마크다운 본문을 작성합니다. 이미지는 `assets/img/projects/` 에 두고 `![설명](assets/img/projects/파일.gif)` 또는 `<figure>`로 넣습니다.
+
+## Career 타임라인 추가
+
+`js/careers-data.js`의 `careers` 배열에 객체를 넣습니다. **위가 과거, 아래가 최근**입니다. 이미지는 `assets/career/`에 두고 `image` 경로만 채우면 카드에 썸네일이 붙습니다. 링크가 없으면 `links: []`, 이미지가 없으면 `image: ""` 로 두면 슬롯이 렌더되지 않습니다.
 
 ## 게임 데이터 병합
 

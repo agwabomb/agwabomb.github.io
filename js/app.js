@@ -172,14 +172,109 @@ function renderChrome() {
     </article>
   `).join("");
 
-  document.getElementById("career-timeline").innerHTML = (state.site.career || []).map((item) => `
-    <li class="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-300">${escapeHtml(item.period)}</p>
-      <h2 class="mt-2 font-display text-xl font-semibold">${escapeHtml(item.title)}</h2>
-      <p class="mt-1 text-sm text-cyan-200/80">${escapeHtml(item.org)}</p>
-      <p class="mt-3 text-sm leading-7 text-slate-400">${escapeHtml(item.body)}</p>
-    </li>
-  `).join("");
+  renderCareerTimeline();
+}
+
+function careerItems() {
+  if (Array.isArray(window.CAREERS) && window.CAREERS.length) return window.CAREERS;
+  return state.site.career || [];
+}
+
+function normalizeCareer(item) {
+  return {
+    period: item.period || "",
+    category: item.category || "",
+    title: item.title || "",
+    subtitle: item.subtitle || item.org || "",
+    description: item.description || item.body || "",
+    details: Array.isArray(item.details) ? item.details : [],
+    image: item.image || "",
+    imageAlt: item.imageAlt || item.title || "",
+    links: Array.isArray(item.links) ? item.links.filter((link) => link && link.url && link.label) : [],
+  };
+}
+
+function careerCategoryClass(category) {
+  const key = String(category || "").toUpperCase();
+  if (key.includes("PRACTICE")) return "border-sky-400/40 bg-sky-400/10 text-sky-200";
+  if (key.includes("TRANSITION")) return "border-indigo-400/40 bg-indigo-500/10 text-indigo-200";
+  if (key.includes("THESIS")) return "border-cyan-400/40 bg-cyan-400/10 text-cyan-200";
+  if (key.includes("EDUCATION")) return "border-cyan-400/40 bg-cyan-400/10 text-cyan-200";
+  if (key.includes("RESEARCH")) return "border-slate-600 bg-slate-800/80 text-slate-300";
+  return "border-slate-600 bg-slate-800/80 text-slate-300";
+}
+
+function formatCareerPeriod(period) {
+  const raw = String(period || "").trim();
+  const parts = raw.split(/\s*~\s*/);
+  if (parts.length === 2 && parts[0] && parts[1]) {
+    return `${escapeHtml(parts[0])} <span class="font-medium text-slate-500">~</span><br>${escapeHtml(parts[1])}`;
+  }
+  if (parts.length === 2 && parts[0] && !parts[1]) {
+    return `${escapeHtml(parts[0])} <span class="font-medium text-slate-500">~</span>`;
+  }
+  return escapeHtml(raw);
+}
+
+function periodDatetime(period) {
+  const match = String(period || "").match(/(\d{4})\.(\d{2})/);
+  return match ? `${match[1]}-${match[2]}` : "";
+}
+
+function isHttpUrl(url) {
+  return /^https?:\/\//i.test(String(url || ""));
+}
+
+function renderCareerTimeline() {
+  const root = document.getElementById("career-timeline");
+  const items = careerItems().map(normalizeCareer);
+  if (!items.length) {
+    root.innerHTML = `<li class="rounded-2xl border border-dashed border-slate-700 px-6 py-10 text-sm text-slate-400">js/careers-data.js 에 이력을 추가해 주세요.</li>`;
+    return;
+  }
+
+  root.innerHTML = items.map((item) => {
+    const datetime = periodDatetime(item.period);
+    const badge = item.category
+      ? `<span class="inline-flex rounded-full border px-2.5 py-1 text-[11px] font-medium tracking-wide ${careerCategoryClass(item.category)}">${escapeHtml(item.category)}</span>`
+      : "";
+    const subtitle = item.subtitle
+      ? `<p class="mt-1 text-sm text-cyan-200/80">${escapeHtml(item.subtitle)}</p>`
+      : "";
+    const description = item.description
+      ? `<p class="mt-3 text-sm leading-7 text-slate-300">${escapeHtml(item.description)}</p>`
+      : "";
+    const details = item.details.length
+      ? `<ul class="mt-3 space-y-1.5 text-sm leading-6 text-slate-400">${item.details.map((detail) => `<li class="flex gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-400/80"></span><span>${escapeHtml(detail)}</span></li>`).join("")}</ul>`
+      : "";
+    const media = item.image
+      ? `<figure class="mt-4 overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
+          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.imageAlt)}" class="h-44 w-full object-cover" onerror="this.closest('figure').remove()">
+        </figure>`
+      : "";
+    const links = item.links.length
+      ? `<div class="mt-4 flex flex-wrap gap-2">${item.links.map((link) => {
+          const extra = isHttpUrl(link.url) ? 'target="_blank" rel="noopener noreferrer"' : "";
+          return `<a class="inline-flex items-center rounded-full border border-slate-600 px-3 py-1 text-xs text-slate-200 transition hover:border-cyan-400/60 hover:text-cyan-300" href="${escapeHtml(link.url)}" ${extra}>${escapeHtml(link.label)}</a>`;
+        }).join("")}</div>`
+      : "";
+
+    return `
+      <li class="career-item">
+        <time class="career-period text-xl md:text-[1.35rem]" ${datetime ? `datetime="${datetime}"` : ""}>${formatCareerPeriod(item.period)}</time>
+        <div class="career-rail" aria-hidden="true"><span class="career-node"></span></div>
+        <article class="career-card rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6 transition hover:border-cyan-400/30">
+          ${badge}
+          <h2 class="mt-3 font-display text-xl font-semibold text-slate-100">${escapeHtml(item.title)}</h2>
+          ${subtitle}
+          ${description}
+          ${details}
+          ${media}
+          ${links}
+        </article>
+      </li>
+    `;
+  }).join("");
 }
 
 function projectVisual(kind) {

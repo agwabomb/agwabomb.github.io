@@ -36,10 +36,15 @@
    - `steam-games.json`(스팀 자동 수집)과 `custom-games.json`(수동 분석평/콘솔 게임)을 타이틀 기준으로 병합(Merge)하여 카드 그리드 렌더링.
    - 장르 필터 및 "기획 분석글 있는 게임만 보기" 토글 지원.
 4. #career (Career & Dev Log):
-   - RESEARCH(오차 통제) -> THESIS(SCIE 논문/실험 설계) -> TRANSITION(그레이박스) -> PRACTICE(실무 협업) 타임라인.
+   - **세로형 타임라인(Vertical Timeline) 레이아웃**: 시기(YYYY.MM) - 중앙 수직 실선/포인트 노드 - 우측 상세 이력 카드.
+   - 이력 데이터(`careers = [...]`)는 자바스크립트 객체 배열로 분리 관리하며, 항목별 태그, 상세 불릿, 첨부 이미지 슬롯, 외부 링크 뱃지를 동적 렌더링할 것.
+   - 학업/연구(천문우주학 오차 통제) -> 역기획 블로그 -> 엔진 기반 기획/프로토타이핑(Snowball Battleground, Gravita)으로 이어지는 성장 타임라인 유지.
 
 # 데이터 및 파일 관리 규칙
 - `scripts/fetch_steam.py` & `.github/workflows/update-steam.yml`: Steam API 자동 갱신 파이프라인. 직접적인 레이아웃 작업 시 건드리지 말 것.
-- `custom-games.json`: 기획자가 직접 콘솔 게임을 등록하거나 스팀 게임에 역기획 블로그 링크/코멘트를 덧붙이는 파일.
+- `custom-games.json`: 기획자 수동 분석평 보관 파일 (기존 코멘트/블로그 URL 보존 필수).
 - `assets/projects/`: 프로젝트 상세 포스트에 들어가는 다이어그램, 스크린샷, 인게임 GIF 리소스 보관 폴더.
+- `careers-data.js` (또는 index.html 상단 script 내 `careers` 배열):
+  * 타임라인 이력을 손쉽게 추가/삭제할 수 있는 단일 소스. 날짜 순 정렬 준수.
+- `assets/career/`: 연혁에 들어가는 논문 표지, 프로젝트 스크린샷, 활동 증빙 이미지 보관 폴더.
 - 텍스트/UI 생성 시 단순 게이머 어휘를 배제하고, 게임 기획 전문 용어(코어 루프, 상태 머신, Pacing, 튜토리얼라이제이션, 시선 유도, 핫스팟)를 일관되게 사용할 것.

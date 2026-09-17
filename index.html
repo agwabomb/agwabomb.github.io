@@ -121,6 +121,75 @@
         linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
       background-size: 48px 48px;
     }
+    .career-timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .career-item {
+      display: grid;
+      grid-template-columns: 1.15rem minmax(0, 1fr);
+      column-gap: 1rem;
+      row-gap: 0.55rem;
+      padding-bottom: 2rem;
+    }
+    .career-item:last-child { padding-bottom: 0; }
+    .career-period {
+      grid-column: 2;
+      grid-row: 1;
+      font-family: Outfit, Pretendard Variable, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f1f5f9;
+      line-height: 1.25;
+      padding-top: 0.12rem;
+    }
+    .career-rail {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      position: relative;
+    }
+    .career-rail::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0.72rem;
+      bottom: -2rem;
+      width: 2px;
+      transform: translateX(-50%);
+      background: #334155;
+    }
+    .career-item:last-child .career-rail::before { display: none; }
+    .career-node {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 0.78rem;
+      height: 0.78rem;
+      margin: 0.42rem auto 0;
+      border-radius: 999px;
+      background: #22d3ee;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.16), 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+    .career-card { grid-column: 2; grid-row: 2; }
+    @media (min-width: 768px) {
+      .career-item {
+        grid-template-columns: 10.5rem 1.35rem minmax(0, 1fr);
+        column-gap: 1.35rem;
+        row-gap: 0;
+        padding-bottom: 2.35rem;
+      }
+      .career-period {
+        grid-column: 1;
+        grid-row: 1;
+        text-align: right;
+        font-size: 1.35rem;
+        padding-top: 0.2rem;
+      }
+      .career-rail { grid-column: 2; grid-row: 1; }
+      .career-card { grid-column: 3; grid-row: 1; }
+      .career-rail::before { bottom: -2.35rem; }
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased">
@@ -234,7 +303,7 @@
         <p class="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">Career &amp; Dev Log</p>
         <h1 class="mt-2 font-display text-3xl font-semibold">연구 노트에서 그레이박스로</h1>
         <p class="mt-3 max-w-2xl text-sm text-slate-400">시뮬레이션 오차를 줄이던 습관이, 엔진 위에서는 밸런싱 수치와 교전 루프의 재현성으로 이어집니다.</p>
-        <ol id="career-timeline" class="mt-10 grid gap-5 lg:grid-cols-2"></ol>
+        <ol id="career-timeline" class="career-timeline mt-12" aria-label="커리어 연혁"></ol>
       </div>
     </section>
   </main>
@@ -252,6 +321,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
   <script src="js/projects-data.js"></script>
+  <script src="js/careers-data.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
